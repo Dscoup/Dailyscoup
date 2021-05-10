@@ -1,0 +1,20 @@
+{
+    "dev": {
+        "server": "",
+        "user": "",
+        "password": "",
+        "database": ""
+    },
+    "test": {
+        "server": "",
+        "user": "",
+        "password": "",
+        "database": ""
+    },
+    "live": {
+        "server": "",
+        "user": "",
+        "password": "",
+        "database": ""
+    }
+}
