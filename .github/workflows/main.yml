@@ -15,5 +15,6 @@ jobs:
        server: dailyscoups.padahjobs.com
        username: daily_scoups
        password: ${{ secrets.SCOUP_FTP_PASSWORD }}
+       
 
   
