@@ -1,0 +1,19 @@
+on:
+  push:
+    branches:
+        - master
+name: 🚀 Deploy website on push
+jobs: 
+   FTP-Deploy-Action:
+    name: FTP-Deploy_Action
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2.3.2
+    - name: FTP-Deploy_Action
+      uses: SamKirkland/FTP-Deploy-Action@4.0.0
+      with:      
+       server: dailyscoups.padahjobs.com
+       username: daily_scoups
+       password: ${{ secrets.SCOUP_FTP_PASSWORD }}
+
+  
