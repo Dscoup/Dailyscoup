@@ -1,7 +1,7 @@
 {
-  "name": "ipmp_api",
+  "name": "vecan_api",
   "version": "1.0.0",
-  "description": "ipmp api .",
+  "description": "vecan_api .",
   "dependencies": {
     "bcrypt": "^1.0.3",
     "body-parser": "^1.18.3",
@@ -27,9 +27,9 @@
     "start": "nodemon server.js"
   },
   "keywords": [
-    "ipmp"
+    "ds"
   ],
-  "author": "integra",
+  "author": "vecan",
   "license": "ISC",
   "devDependencies": {
     "grunt-apidoc": "^0.11.0",

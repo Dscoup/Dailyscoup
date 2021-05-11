@@ -39,7 +39,7 @@ app.use(function (req, res, next) {
 );
 
 app.use(session({
-    secret: 'INTEGRA',
+    secret: 'vecan',
     resave: true,
     saveUninitialized: true,
     cookie: {

@@ -1,6 +1,5 @@
 function mailOptions() {
-    this.from = 'iproof@integra.co.in',
-        //this.from = 'veeraraghavan.radhakrishnan@pearson.com',
+    this.from = 'admin@vecan.co.in',
         this.to = '',
         this.cc = '',
         this.bcc = '',

@@ -1,20 +1,8 @@
 {
     "dev": {
-        "server": "",
-        "user": "",
-        "password": "",
-        "database": ""
-    },
-    "test": {
-        "server": "",
-        "user": "",
-        "password": "",
-        "database": ""
-    },
-    "live": {
-        "server": "",
-        "user": "",
-        "password": "",
-        "database": ""
+        "server": "103.146.177.220",
+        "user": "sa",
+        "password": "Teamwork@2021",
+        "database": "GlobalAssistAdmin"
     }
 }

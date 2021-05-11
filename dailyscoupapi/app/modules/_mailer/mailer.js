@@ -5,14 +5,13 @@ exports.sendMail = (mailOptions) => {
         const smtpTransport = require('nodemailer-smtp-transport');
         nodemailer.createTestAccount(() => {
             let transporter;
-            //for integra
-            if (mailOptions.from == "iproof@integra.co.in") {
+            if (mailOptions.from == "vecan@co") {
                 transporter = nodemailer.createTransport({
                     host: "smtp.office365.com",
                     port: 587,
                     secure: false, // true for 465, false for other ports
                     auth: {
-                        user: "iengine.cloudtest@integra.co.in",
+                        user: "vecan@co",
                         pass: "Password1"
                     },
                     tls: {
