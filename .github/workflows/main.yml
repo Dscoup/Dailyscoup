@@ -12,9 +12,10 @@ jobs:
     - name: FTP-Deploy_Action
       uses: SamKirkland/FTP-Deploy-Action@4.0.0
       with:      
-       server: dailyscoups.padahjobs.com
-       username: daily_scoups
+       server: ftp.cjeast.com
+       username: dailyscoop@cjeast.com
        password: ${{ secrets.SCOUP_FTP_PASSWORD }}
+       port: 21
        
 
   
