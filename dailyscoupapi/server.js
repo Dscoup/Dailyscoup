@@ -62,5 +62,5 @@ require("./app")(app);
 const port = process.env.PORT || 5001;
 app.listen(port, function () {
     console.log('Currently running in ' + modeconfig.ENVMODE + ' Mode');
-    console.log("CCNA api listening on port " + port + "!");
+    console.log("ds api listening on port " + port + "!");
 });

@@ -2,7 +2,7 @@
 const prefix = '';
 module.exports = {
   EXPIRES: 86400,
-  JWT_SECRET_KEY: 'CCNA',
+  JWT_SECRET_KEY: 'DS',
   PREFIX: prefix,
   MailTemplate: {},
   CROS_OPTIONS: {
@@ -21,6 +21,6 @@ module.exports = {
     ALLOWEDMETHODS: ["GET,POST"],
     credentials: true,
   },
-  defaultPassword: 'ccna',
+  defaultPassword: 'ds',
   isDefault: true
 };

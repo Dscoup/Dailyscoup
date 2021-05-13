@@ -1,5 +1,5 @@
 module.exports = {
-    'serverport': 5001,
+    'serverport': 5000,
     'tokenexp': 7200,
-    'secret': 'IPmP',
+    'secret': 'ds',
 }
