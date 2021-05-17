@@ -1,15 +1,15 @@
 // const output = require("../app/modules/_models/output");
 const output = require("../_models/output");
-const loginRepo = require("../repository/login");
+const couponRepo = require("../repository/coupon");
 
-exports.login = async function (req, res, next) {
+exports.getUserCouponList = async function (req, res, next) {
     var _output = new output();
     try {
-        if (req.query.emailId == undefined) { throw { message: "Invalid Email Id" } }
-        let result = await loginRepo.login(req.query.OperationId);
+        if (req.query.userId == undefined) { throw { message: "user id not exists" } }
+        let result = await couponRepo.getUserCouponList(req.query.userId);
         _output.data = result;
         _output.isSuccess = true;
-        _output.message = "Trip Request Get Successfull";
+        _output.message = "user coupons Get Successfull";
     } catch (error) {
         _output.data = error.message;
         _output.isSuccess = false;
@@ -19,14 +19,14 @@ exports.login = async function (req, res, next) {
 };
 
 
-exports.register = async function (req, res, next) {
+exports.addEditCoupons = async function (req, res, next) {
     var _output = new output();
     try {
-        if (req.query.emailId == undefined) { throw { message: "Email id not found" } }
-        let result = await loginRepo.login(req.query.OperationId);
+        // if (req.query.emailId == undefined) { throw { message: "Email id not found" } }
+        let result = await couponRepo.addEditCoupons(req.query);
         _output.data = result;
         _output.isSuccess = true;
-        _output.message = "user Registered Successfull";
+        _output.message = "coupons Registered Successfull";
     } catch (error) {
         _output.data = error.message;
         _output.isSuccess = false;
@@ -35,30 +35,15 @@ exports.register = async function (req, res, next) {
     res.send(_output);
 };
 
-exports.forgotPass = async function (req, res, next) {
-    var _output = new output();
-    try {
-        if (req.query.emailId == undefined) { throw { message: "Email id not found" } }
-        let result = await loginRepo.forgotPass(req.query.OperationId);
-        _output.data = result;
-        _output.isSuccess = true;
-        _output.message = "password reset Successfull";
-    } catch (error) {
-        _output.data = error.message;
-        _output.isSuccess = false;
-        _output.message = error.message;
-    }
-    res.send(_output);
-};
 
-exports.getallusers = async function (req, res, next) {
+exports.getallCoupons = async function (req, res, next) {
     var _output = new output();
     try {
         if (req.query.userid == undefined) { throw { message: "userid not found" } }
-        let result = await loginRepo.getallusers(req.query.userid);
+        let result = await couponRepo.getallCoupons(req.query.userid);
         _output.data = result;
         _output.isSuccess = true;
-        _output.message = "user list got Successfull";
+        _output.message = "all coupons list got Successfull";
     } catch (error) {
         _output.data = error.message;
         _output.isSuccess = false;
@@ -67,6 +52,24 @@ exports.getallusers = async function (req, res, next) {
     res.send(_output);
 };
 
+
+
+exports.userPurchasedCoupons = async function (req, res, next) {
+    var _output = new output();
+    try {
+        if (req.query.userid == undefined) { throw { message: "userid not found" } }
+        if (req.query.couponid == undefined) { throw { message: "couponid not found" } }
+        let result = await loginRepo.userPurchasedCoupons(req.query.userid,req.query.couponid);
+        _output.data = result;
+        _output.isSuccess = true;
+        _output.message = "all coupons list got Successfull";
+    } catch (error) {
+        _output.data = error.message;
+        _output.isSuccess = false;
+        _output.message = error.message;
+    }
+    res.send(_output);
+};
 
 
 

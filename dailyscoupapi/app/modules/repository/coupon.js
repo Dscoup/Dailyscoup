@@ -2,14 +2,14 @@ var sqlType = require('mssql');
 const db_library = require('../_helpers/db_library')
 const param = require('../_models/parameter_input');
 
-exports.login = async (emailId) => {
+exports.getUserCouponList = async (userId) => {
     return await new Promise(async (resolve, reject) => {
         let parameters = [];
-        let para = new param('emailId', sqlType.INT, emailId);
+        let para = new param('userId', sqlType.INT, userId);
         parameters.push(para);
 
         db_library
-            .execute("[dbo].[SP_TripRequest]", parameters, db_library.query_type.SP).then(async (value) => {
+            .execute("[dbo].[SP_UserCouponList]", parameters, db_library.query_type.SP).then(async (value) => {
                 resolve(value.recordsets[0]);
             }).catch(err => {
                 reject(err)
@@ -17,34 +17,18 @@ exports.login = async (emailId) => {
     })
 }
 
-exports.register = async (emailId,password) => {
+
+exports.addEditCoupons = async (data) => {
     return await new Promise(async (resolve, reject) => {
         let parameters = [];
-        let para = new param('emailId', sqlType.INT, emailId);
+        let para = new param('userId', sqlType.INT, data.userId);
         parameters.push(para);
-        let para1 = new param('password', sqlType.NVarChar, password);
+        let para1 = new param('couponId', sqlType.INT, data.couponId);
         parameters.push(para1);
-
-        db_library
-            .execute("[dbo].[SP_AddEditUser]", parameters, db_library.query_type.SP).then(async (value) => {
-                resolve(value.recordsets[0]);
-            }).catch(err => {
-                reject(err)
-            });
-    })
-}
-
-
-exports.forgotPass = async (emailId,password) => {
-    return await new Promise(async (resolve, reject) => {
-        let parameters = [];
-        let para = new param('emailId', sqlType.INT, emailId);
-        parameters.push(para);
-        let para1 = new param('password', sqlType.NVarChar, password);
+        let para2 = new param('coupondetails', sqlType.NVarChar, data.coupondetails);
         parameters.push(para1);
-
         db_library
-            .execute("[dbo].[SP_ForgotPassword]", parameters, db_library.query_type.SP).then(async (value) => {
+            .execute("[dbo].[SP_AddEditCoupons]", parameters, db_library.query_type.SP).then(async (value) => {
                 resolve(value.recordsets[0]);
             }).catch(err => {
                 reject(err)
@@ -52,17 +36,37 @@ exports.forgotPass = async (emailId,password) => {
     })
 }
 
-exports.getallusers = async (userid) => {
+
+exports.getallCoupons = async (userId) => {
     return await new Promise(async (resolve, reject) => {
         let parameters = [];
-        let para = new param('userid', sqlType.INT, userid);
+        let para = new param('userId', sqlType.INT, userId);
         parameters.push(para);
         
         db_library
-            .execute("[dbo].[SP_GetUserList]", parameters, db_library.query_type.SP).then(async (value) => {
+            .execute("[dbo].[SP_GetAllCoupons]", parameters, db_library.query_type.SP).then(async (value) => {
                 resolve(value.recordsets[0]);
             }).catch(err => {
                 reject(err)
             });
     })
 }
+
+
+
+exports.userPurchasedCoupons = async (userId,couponid) => {
+    return await new Promise(async (resolve, reject) => {
+        let parameters = [];
+        let para = new param('userId', sqlType.INT, userId);
+        parameters.push(para);
+        let para = new param('couponid', sqlType.INT, couponid);
+        parameters.push(para);
+        db_library
+            .execute("[dbo].[SP_UserPurchasedCoupons]", parameters, db_library.query_type.SP).then(async (value) => {
+                resolve(value.recordsets[0]);
+            }).catch(err => {
+                reject(err)
+            });
+    })
+}
+
