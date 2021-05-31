@@ -1,70 +1,79 @@
-import React, { PureComponent } from 'react';
-import './login.css';
-import { withRouter } from "react-router-dom";
-// import { useHistory } from 'react-router-dom';
+import React, { PureComponent } from 'react'
+import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn } from 'mdbreact';
+
+
 class Login extends PureComponent {
     constructor(props) {
-        super(props);
+        super(props)
+
         this.state = {
-            email: '',
-            password: ''
-        };
-
-        // This binding is necessary to make `this` work in the callback
-
-        this.renderRegister = this.renderRegister.bind(this);
-        this.renderAuth = this.renderAuth.bind(this);
-
+            
+        }
     }
 
-
-    renderAuth() {
-        this.props.history.push('/home');
-    }
-
-    renderRegister() {
-        this.props.history.push('/register');
-    }
     render() {
         return (
-            <div>
+            <form>
+  {/* <!-- Email input --> */}
+  <div class="form-outline mb-4">
+    <input type="email" id="form2Example1" class="form-control" />
+    <label class="form-label" for="form2Example1">Email address</label>
+  </div>
 
-                <div id="iconGroup">
-                    <Facebook />
+  {/* <!-- Password input --> */}
+  <div class="form-outline mb-4">
+    <input type="password" id="form2Example2" class="form-control" />
+    <label class="form-label" for="form2Example2">Password</label>
+  </div>
 
-                </div>
-                <div id="loginform">
+  {/* <!-- 2 column grid layout for inline styling --> */}
+  <div class="row mb-4">
+    <div class="col d-flex justify-content-center">
+      {/* <!-- Checkbox --> */}
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          value=""
+          id="form2Example3"
+          checked
+        />
+        <label class="form-check-label" for="form2Example3"> Remember me </label>
+      </div>
+    </div>
 
-                    <FormInput placeholder="Email" type="email" />
-                    <FormInput placeholder="Password" type="password" />
-                    <div id="button" class="row">
-                        <button onClick={this.renderAuth}>SIGN IN</button>
-                    </div>
-                    <div id="alternativeLogin">
-                        <label onClick={this.renderRegister}>Need to register ? Sign Up</label>
+    <div class="col">
+      {/* <!-- Simple link --> */}
+      <a href="#!">Forgot password?</a>
+    </div>
+  </div>
 
-                    </div>
-                </div>
-            </div>
+  {/* <!-- Submit button --> */}
+  <button type="submit" class="btn btn-primary btn-block mb-4">Sign in</button>
+
+  {/* <!-- Register buttons --> */}
+  <div class="text-center">
+    <p>Not a member? <a href="#!">Register</a></p>
+    <p>or sign up with:</p>
+    <button type="button" class="btn btn-primary btn-floating mx-1">
+      <i class="fab fa-facebook-f"></i>
+    </button>
+
+    <button type="button" class="btn btn-primary btn-floating mx-1">
+      <i class="fab fa-google"></i>
+    </button>
+
+    <button type="button" class="btn btn-primary btn-floating mx-1">
+      <i class="fab fa-twitter"></i>
+    </button>
+
+    <button type="button" class="btn btn-primary btn-floating mx-1">
+      <i class="fab fa-github"></i>
+    </button>
+  </div>
+</form>
         )
     }
 }
-export default withRouter(Login)
 
-
-
-
-
-const FormInput = props => (
-    <div class="row">
-        <label>{props.description}</label>
-        <input type={props.type} placeholder={props.placeholder} />
-    </div>
-);
-
-
-
-const Facebook = props => (
-    <a href="#" id="facebookIcon"></a>
-);
-
+export default Login
