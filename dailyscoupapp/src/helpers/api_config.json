@@ -1,10 +1,6 @@
 {
-    "localdev" : {
-        "API_BASE_URL" : "http://localhost:3000/dailyscoupapi",
-        "dailyScoupsHostName" : "localdev"
-    },
-    "dev" : {
-        "API_BASE_URL" : "http://localhost:3000/dailyscoupapi",
-        "dailyScoupsHostName" : "localdev"
-    }
-}
+  "localdev": {
+    "API_BASE_URL": "http://localhost:5000/",
+    "dshostname":"localhost"
+  }
+  }

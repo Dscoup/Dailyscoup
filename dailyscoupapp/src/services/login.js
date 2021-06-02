@@ -4,10 +4,21 @@ export const CreatUser = {
     createUser
 }
 
-function createUser(Userdata)
+async function createUser(Userdata)
 {
-    return new Promise(function (resolve,reject)
+    return await new Promise(function (resolve,reject)
     {
-        // API.
+        API.postTokenAPI(CONFIG.Login,{Userdata})
+            .then(response =>
+                {
+                    let res = JSON.parse(response);
+                    if(res.is_success)
+                    {
+                        resolve(res.data);
+                    }
+                    else{
+                        reject(res.message);
+                    }
+                })
     })
 }

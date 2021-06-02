@@ -1,7 +1,7 @@
 {
   "name": "daily_scoups",
   "description": "daily scoups app",
-  "environment": "dev",
+  "environment": "localdev",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

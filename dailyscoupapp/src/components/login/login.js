@@ -139,7 +139,7 @@ export default function Login() {
                             type="submit"
                             fullWidth
                             variant="contained"
-                            color="primary"
+                            // color="primary"
                             className={classes.submit}
                             
                         >
@@ -166,19 +166,19 @@ export default function Login() {
               </p>
                         <Grid container>
                             <Grid item xs>
-                                 <Avatar >
+                                 {/* <Avatar > */}
                                     <Facebook />
-                                 </Avatar>
+                                 {/* </Avatar> */}
                             </Grid>
                             <Grid item xs>
-                                 <Avatar >
+                                 {/* <Avatar > */}
                                     <Apple />
-                                 </Avatar>
+                                 {/* </Avatar> */}
                             </Grid>
                             <Grid item>
-                            <Avatar >
+                            {/* <Avatar > */}
                                     <Mail />
-                                 </Avatar>
+                                 {/* </Avatar> */}
                             </Grid>
                         </Grid>
                         <br />

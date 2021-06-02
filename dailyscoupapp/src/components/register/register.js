@@ -1,4 +1,5 @@
-import React from 'react';
+// import React from 'react';
+import React ,{useState,useRef} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -14,6 +15,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import './register.css';
 import { Facebook, Apple, Mail } from '@material-ui/icons';
+import {LoginServices} from '../../services/login'
 
 function Copyright() {
     return (
@@ -50,6 +52,51 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignUp() {
     const classes = useStyles();
+    const [validation1, setValidation1] = useState(false);
+    const [validation2, setValidation2] = useState(false);
+    const [validation3, setValidation3] = useState(false);
+    const [mailText, setEmailText] = useState('');
+    const [passText, setPassText] = useState('');
+    const [nameText, setNameText] = useState('');
+    const valueRef1 = useRef(''); 
+    const valueRef2 = useRef(''); 
+    const valueRef3 = useRef(''); 
+
+    const handleSubmit= (e) => {
+      // alert('hit')
+      e.preventDefault();
+      if(valueRef1.current.value == '')
+      {
+          setValidation1(true);
+          setNameText('Username should not be empty')
+      }
+      else
+      {
+          setValidation1(false);
+          setNameText('')
+      }
+
+      if(valueRef2.current.value == '')
+      {
+          setValidation2(true);
+          setEmailText('Email should not be empty')
+      }
+      else{
+          setValidation2(false);
+          setEmailText('')
+      }
+
+      if(valueRef3.current.value == '')
+      {
+        setValidation3(true);
+          setPassText('Password should not be empty')
+      }
+      else{
+        setValidation3(false);
+          setPassText('')
+      }
+      
+    }
 
     return (
         <div>
@@ -64,39 +111,47 @@ export default function SignUp() {
         <Typography component="h1" variant="h5">
           Login
         </Typography> */}
-                    <form className={classes.form} noValidate>
+                    <form className={classes.form} onSubmit ={e => { handleSubmit(e) }}>
                     <TextField
                             // variant="outlined"
                             margin="normal"
-                            required
+                            // required
                             fullWidth
                             id="username"
                             label="User Name"
                             name="username"
                             autoComplete="name"
                             autoFocus
+                            helperText={nameText}
+                            error = {validation1}
+                            inputRef={valueRef1}
                         />
                         <TextField
                             // variant="outlined"
                             margin="normal"
-                            required
+                            // required
                             fullWidth
                             id="email"
                             label="Email Address"
                             name="email"
                             autoComplete="email"
-                            autoFocus
+                            helperText={mailText}
+                            error = {validation2}
+                            inputRef={valueRef2}
                         />
                         <TextField
                             // variant="outlined"
                             margin="normal"
-                            required
+                            // required
                             fullWidth
                             name="password"
                             label="Password"
                             type="password"
                             id="password"
                             autoComplete="current-password"
+                            inputRef={valueRef3}
+                            error = {validation3}
+                            helperText={passText}
                         />
                         {/* <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
@@ -107,10 +162,10 @@ export default function SignUp() {
                             type="submit"
                             fullWidth
                             variant="contained"
-                            color="primary"
+                            // color="primary"
                             className={classes.submit}
                         >
-                            Sign In
+                            Sign Up
           </Button>
                         <Grid container>
                             <Grid item xs>
@@ -133,19 +188,19 @@ export default function SignUp() {
               </p>
                         <Grid container>
                             <Grid item xs>
-                                 <Avatar >
+                                 {/* <Avatar > */}
                                     <Facebook />
-                                 </Avatar>
+                                 {/* </Avatar> */}
                             </Grid>
                             <Grid item xs>
-                                 <Avatar >
+                                 {/* <Avatar > */}
                                     <Apple />
-                                 </Avatar>
+                                 {/* </Avatar> */}
                             </Grid>
                             <Grid item>
-                            <Avatar >
+                            {/* <Avatar > */}
                                     <Mail />
-                                 </Avatar>
+                                 {/* </Avatar> */}
                             </Grid>
                         </Grid>
                         <br />
