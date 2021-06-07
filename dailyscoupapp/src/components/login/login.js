@@ -14,6 +14,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import './login.css';
 import { Facebook, Apple, Mail } from '@material-ui/icons';
+import LoginService from '../../services/login';
 
 function Copyright() {
     return (
@@ -66,7 +67,8 @@ export default function Login() {
         if(valueRef1.current.value == '')
         {
             setValidation1(true);
-            setEmailText('Email should not be empty')
+            setEmailText('Email should not be empty');
+            return false;
         }
         else
         {
@@ -77,12 +79,15 @@ export default function Login() {
         if(valueRef2.current.value == '')
         {
             setValidation2(true);
-            setPassText('Password should not be empty')
+            setPassText('Password should not be empty');
+            return false;
         }
         else{
             setValidation2(false);
             setPassText('')
         }
+
+        // LoginService.createUser
         
       }
 

@@ -6,6 +6,8 @@ import Register from './components/register/register';
 import Login from './components/login/login';
 import Home from './components/home/home';
 import Dashboard from './components/dashboard/dashboard';
+import ResetPassword from './components/resetpassword/resetpassword';
+import ForgotPassword from './components/forgotpassword/forgotpassword';
 
 function App() {
   return (
@@ -20,6 +22,12 @@ function App() {
        </Route>
        <Route path="/dashboard">
           <Dashboard />
+       </Route>
+       <Route path="/reset">
+          <ResetPassword />
+       </Route>
+       <Route path="/forgot">
+          <ForgotPassword />
        </Route>
        <Route path="/">
           <Login />
