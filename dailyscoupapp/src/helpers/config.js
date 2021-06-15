@@ -8,7 +8,8 @@ export const CONFIG = {
 
 	IS_SOCKET_CONNECTION_ON: true,
 	IS_INTERVEL_TIME: 10000,
-	Login: "/login",
+	Login: "login",
 	Logout: "/logout",
+	AddEditUser: "/addedituser",
 
 	};

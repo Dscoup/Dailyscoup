@@ -1,34 +1,36 @@
 // import React from 'react';
-import React ,{useState,useRef} from 'react';
-import Avatar from '@material-ui/core/Avatar';
+import React, { useState, useRef } from 'react';
+// import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
+import { useHistory } from "react-router-dom";
+
+// import FormControlLabel from '@material-ui/core/FormControlLabel';
+// import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+// import Box from '@material-ui/core/Box';
+// import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import './register.css';
 import { Facebook, Apple, Mail } from '@material-ui/icons';
-import {LoginServices} from '../../services/login'
+import { LoginService } from '../../services'
 
-function Copyright() {
-    return (
-        <Typography variant="body2" color="textSecondary" align="center">
-            {'Copyright © '}
-            <Link color="inherit" href="https://material-ui.com/">
-                Your Website
-      </Link>{' '}
-            {new Date().getFullYear()}
-            {'.'}
-        </Typography>
-    );
-}
+// function Copyright() {
+//     return (
+//         <Typography variant="body2" color="textSecondary" align="center">
+//             {'Copyright © '}
+//             <Link color="inherit" href="https://material-ui.com/">
+//                 Your Website
+//       </Link>{' '}
+//             {new Date().getFullYear()}
+//             {'.'}
+//         </Typography>
+//     );
+// }
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -58,44 +60,68 @@ export default function SignUp() {
     const [mailText, setEmailText] = useState('');
     const [passText, setPassText] = useState('');
     const [nameText, setNameText] = useState('');
-    const valueRef1 = useRef(''); 
-    const valueRef2 = useRef(''); 
-    const valueRef3 = useRef(''); 
+    const valueRef1 = useRef('');
+    const valueRef2 = useRef('');
+    const valueRef3 = useRef('');
+    const history = useHistory();
 
-    const handleSubmit= (e) => {
-      // alert('hit')
-      e.preventDefault();
-      if(valueRef1.current.value == '')
-      {
-          setValidation1(true);
-          setNameText('Username should not be empty')
-      }
-      else
-      {
-          setValidation1(false);
-          setNameText('')
-      }
 
-      if(valueRef2.current.value == '')
-      {
-          setValidation2(true);
-          setEmailText('Email should not be empty')
-      }
-      else{
-          setValidation2(false);
-          setEmailText('')
-      }
+    const OnSignInClick = (e) => {
+        history.push("/login");
+    }
 
-      if(valueRef3.current.value == '')
-      {
-        setValidation3(true);
-          setPassText('Password should not be empty')
-      }
-      else{
-        setValidation3(false);
-          setPassText('')
-      }
-      
+    const OnForgotClick = (e) => {
+        history.push("/forgot");
+    }
+
+    const OnGuestClick = (e) => {
+        history.push("/home");
+    }
+    const handleSubmit = (e) => {
+        // alert('hit')
+        e.preventDefault();
+        if (valueRef1.current.value === '') {
+            setValidation1(true);
+            setNameText('Username should not be empty');
+            return false;
+        }
+        else {
+            setValidation1(false);
+            setNameText('')
+        }
+
+        if (valueRef2.current.value === '') {
+            setValidation2(true);
+            setEmailText('Email should not be empty');
+            return false;
+        }
+        else {
+            setValidation2(false);
+            setEmailText('')
+        }
+
+        if (valueRef3.current.value === '') {
+            setValidation3(true);
+            setPassText('Password should not be empty');
+            return false;
+        }
+        else {
+            setValidation3(false);
+            setPassText('')
+        }
+
+        let userdata = {};
+        userdata.username = valueRef1.current.value;
+        userdata.email = valueRef2.current.value;
+        userdata.password = valueRef3.current.value;
+
+
+        LoginService.createUser({
+            userdata
+        }).then(result => {
+            console.log(result)
+        })
+
     }
 
     return (
@@ -111,8 +137,12 @@ export default function SignUp() {
         <Typography component="h1" variant="h5">
           Login
         </Typography> */}
-                    <form className={classes.form} onSubmit ={e => { handleSubmit(e) }}>
-                    <TextField
+                    <h4>Already have an account? Click here! </h4>
+                    <Typography component="h4" variant="h5">
+                        <a onClick={e => { OnSignInClick(e) }}>Login</a>
+                    </Typography>
+                    <form className={classes.form} onSubmit={e => { handleSubmit(e) }}>
+                        <TextField
                             // variant="outlined"
                             margin="normal"
                             // required
@@ -123,7 +153,7 @@ export default function SignUp() {
                             autoComplete="name"
                             autoFocus
                             helperText={nameText}
-                            error = {validation1}
+                            error={validation1}
                             inputRef={valueRef1}
                         />
                         <TextField
@@ -136,7 +166,7 @@ export default function SignUp() {
                             name="email"
                             autoComplete="email"
                             helperText={mailText}
-                            error = {validation2}
+                            error={validation2}
                             inputRef={valueRef2}
                         />
                         <TextField
@@ -150,7 +180,7 @@ export default function SignUp() {
                             id="password"
                             autoComplete="current-password"
                             inputRef={valueRef3}
-                            error = {validation3}
+                            error={validation3}
                             helperText={passText}
                         />
                         {/* <FormControlLabel
@@ -169,12 +199,12 @@ export default function SignUp() {
           </Button>
                         <Grid container>
                             <Grid item xs>
-                                <Link href="#" variant="body2">
+                                <Link onClick={e => { OnForgotClick(e) }} variant="body2">
                                     Forgot password?
               </Link>
                             </Grid>
                             <Grid item>
-                                <Link href="#" variant="body2">
+                                <Link onClick={e => { OnGuestClick(e) }} variant="body2">
                                     {"Continue as guest? "}
                                 </Link>
                             </Grid>
@@ -188,19 +218,19 @@ export default function SignUp() {
               </p>
                         <Grid container>
                             <Grid item xs>
-                                 {/* <Avatar > */}
-                                    <Facebook />
-                                 {/* </Avatar> */}
+                                {/* <Avatar > */}
+                                <Facebook />
+                                {/* </Avatar> */}
                             </Grid>
                             <Grid item xs>
-                                 {/* <Avatar > */}
-                                    <Apple />
-                                 {/* </Avatar> */}
+                                {/* <Avatar > */}
+                                <Apple />
+                                {/* </Avatar> */}
                             </Grid>
                             <Grid item>
-                            {/* <Avatar > */}
-                                    <Mail />
-                                 {/* </Avatar> */}
+                                {/* <Avatar > */}
+                                <Mail />
+                                {/* </Avatar> */}
                             </Grid>
                         </Grid>
                         <br />

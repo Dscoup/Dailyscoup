@@ -3,6 +3,7 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
+import { useHistory } from "react-router-dom";
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
@@ -14,7 +15,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import './login.css';
 import { Facebook, Apple, Mail } from '@material-ui/icons';
-import LoginService from '../../services/login';
+import {LoginService} from '../../services';
+import PropTypes from 'prop-types';
 
 function Copyright() {
     return (
@@ -51,7 +53,10 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function Login() {
+
+
+
+export default function Login({ setToken }) {
     const classes = useStyles();
     const [validation1, setValidation1] = useState(false);
     const [validation2, setValidation2] = useState(false);
@@ -59,8 +64,15 @@ export default function Login() {
     const [passText, setPassText] = useState('');
     const valueRef1 = useRef(''); 
     const valueRef2 = useRef(''); 
+    const [username, setUserName] = useState();
+  const [password, setPassword] = useState();
 
+    const history = useHistory();
 
+    const OnSignUpClick = (e) =>
+    {
+        history.push("/register");
+    }
     const handleSubmit= (e) => {
         // alert('hit')
         e.preventDefault();
@@ -87,9 +99,18 @@ export default function Login() {
             setPassText('')
         }
 
-        // LoginService.createUser
+        let userdata = {};
+        userdata.email = valueRef1.current.value;
+        userdata.password = valueRef2.current.value;
+
+        
+            const token =  LoginService.createUser({
+                userdata
+              });
+            //   setToken(token);
         
       }
+
 
     return (
         <div>
@@ -105,7 +126,7 @@ export default function Login() {
         
          <h4>Are You a new user? join as now! </h4> 
          <Typography component="h4" variant="h5"> 
-         <a href="#">Sign Up</a>
+         <a onClick = {e =>{OnSignUpClick(e)}}>Sign Up</a>
          </Typography>
                     <form className={classes.form} onSubmit ={e => { handleSubmit(e) }}>
                         <TextField
@@ -195,3 +216,7 @@ export default function Login() {
         </div>
     );
 }
+
+Login.propTypes = {
+    setToken: PropTypes.func.isRequired
+  }

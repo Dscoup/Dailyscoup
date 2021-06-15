@@ -133,9 +133,9 @@ function postAPI(url, params = {}, contentType = "", headers = "") {
       xhttp.open("POST", url, true);
       contentType = contentType ? contentType : "application/json";
       xhttp.setRequestHeader("Content-Type", contentType);
-      xhttp.setRequestHeader("clientid",headers.clientid);
-      xhttp.setRequestHeader("apikey",headers.apikey);
-      //xhttp.setRequestHeader("cache-control", "no-cache");
+      // xhttp.setRequestHeader("clientid",headers.clientid);
+      // xhttp.setRequestHeader("apikey",headers.apikey);
+      xhttp.setRequestHeader("cache-control", "no-cache");
       params ? contentType === "application/json" ? xhttp.send(JSON.stringify(params)) : xhttp.send(params) : xhttp.send();
     } catch (error) {
       reject(error);
@@ -338,7 +338,7 @@ function uploadFileAPI(url, params = {}) {
 function fetchTokenAPI(url, params = {}, contentType = "") {
   url = baseURL + url;
   let token = LocalStorage.getData("tkn") !== null && LocalStorage.getData("tkn") !== "" ? LocalStorage.getData("tkn") : LocalStorage.getSessionData("tkn");
-  // let ud = LocalStorage.getData("ud") !== null && LocalStorage.getData("ud") !== "" ? LocalStorage.getData("ud") : LocalStorage.getSessionData("ud");
+  let ud = LocalStorage.getData("ud") !== null && LocalStorage.getData("ud") !== "" ? LocalStorage.getData("ud") : LocalStorage.getSessionData("ud");
   contentType = contentType ? contentType : "application/json";
   if (!token) throw "error";
 
