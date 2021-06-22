@@ -121,7 +121,7 @@ export default function SignUp() {
         }).then(result => {
             console.log(result)
         })
-
+        
     }
 
     return (
